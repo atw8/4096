@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2016 Dmitry Ivanov
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+    <head>
+        <title>4096 Designer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="styles/main.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        
+        <div class="heading">
+            <h1 class="title">4096</h1>
+            
+            <div id="inputBody" class="inputBody">
+                <div class="inputWrapper">
+                    <div class="inputText" >Width:</div>
+                    <input type="text" maxLength="2" id="inputWidth" class="inputBar"/>
+                </div>
+
+                <div class="inputWrapper">
+                    <div class="inputText">Height:</div>
+                    <input type="text" maxLength="2" id="inputHeight" class="inputBar" />
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="gameContainer" class="gameContainer" style="width:600px; height:600px;">
+
+        </div>
+        
+        <div class="bottom">
+            <a id="bottomGame" class="bottomGame">Play Level</a>
+            
+        </div>
+        
+        <script src ="js/global.js"></script>
+        <script src ="js/global4096.js"></script>
+        <script src ="js/board.js"></script>
+        <script src ="js/background.js"></script>
+        <script src ="js/localStorageManager.js"></script>
+        <script src ="js/designManager.js"></script>
+        
+        <script>
+            "use strict";
+            
+           
+            let background;
+            {
+                let parentNode = document.getElementById("gameContainer");
+                background = new Background(parentNode);
+            }
+            
+            let storageManager = new LocalStorageManager();
+            
+            var designManager = new DesignManager(background, storageManager);
+            
+        </script>
+    </body>
+</html>

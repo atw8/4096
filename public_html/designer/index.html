@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2016 Dmitry Ivanov
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+    <head>
+        <title>4096</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            
+            
+            
+            .inputText {
+                position: relative;
+                display: inline;
+                font-family:Arial, Sans-Serif;
+                font-size: 20px;
+                color: red; 
+                font-weight: bold;
+                font-family: arial;
+                margin: 2px;
+                
+            }
+            
+
+            @keyframes slidein {
+                from {
+                    margin-left: 100%;
+                    width: 300%; 
+                }
+
+                to {
+                    margin-left: 0%;
+                    width: 100%;
+                }
+            }
+            
+            .inputBody {
+                position: relative;
+                display: table;
+                margin: 1em auto;
+                border: 1px solid black;
+                
+                border-radius: 0px;
+                padding-top: 0.5em;
+                padding-bottom: 1.0em;
+                padding-left: 1.0em;
+                padding-right: 1.0em;
+                
+                background-color: white;
+                width: 400px;
+            }
+            
+
+
+           
+            .inputBar {
+                position: relative;
+                display: inline;
+                font-family:Arial, Sans-Serif;
+                font-size: 20px;
+                background-color: #d6e5f4;
+                width:100px;
+            }
+            
+
+            .inputWidth {
+                float: left;
+            }
+            
+            .inputHeight {
+                float: right;
+            }
+                       
+            .mainBody {
+                position: relative;
+                background-color: #bbada0;
+                border-radius: 7px;
+                margin: 1em auto;
+                padding: 0px;
+
+            }
+            
+            
+            .tile {
+                position: absolute;
+                
+
+            }
+            
+            .appearAnimation {
+                -webkit-animation: appear 200ms ease 100ms;
+                -moz-animation: appear 200ms ease 100ms;
+                animation: appear 200ms ease 100ms;
+                -webkit-animation-fill-mode: backwards;
+                -moz-animation-fill-mode: backwards;
+                animation-fill-mode: backwards;
+                
+            }
+            
+            
+            @-webkit-keyframes appear {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: scale(0);
+                    -moz-transform: scale(0);
+                    -ms-transform: scale(0);
+                    transform: scale(0); }
+
+                100% {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    -moz-transform: scale(1);
+                    -ms-transform: scale(1);
+                    transform: scale(1); } }
+
+            @-moz-keyframes appear {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: scale(0);
+                    -moz-transform: scale(0);
+                    -ms-transform: scale(0);
+                    transform: scale(0); }
+
+                100% {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    -moz-transform: scale(1);
+                    -ms-transform: scale(1);
+                    transform: scale(1); } }
+            
+            @keyframes appear {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: scale(0);
+                    -moz-transform: scale(0);
+                    -ms-transform: scale(0);
+                    transform: scale(0); }
+                
+                100% {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    -moz-transform: scale(1);
+                    -ms-transform: scale(1);
+                    transform: scale(1); } }
+            
+
+    
+            
+        </style>
+    </head>
+    <body>
+        
+        
+        <div id="inputBody" class="inputBody">
+            <div class="inputWidth">
+                <div class="inputText" >Width:</div>
+                <input type="text" maxLength="2" id="inputWidth" class="inputBar"/>
+            </div>
+            
+            <div class="inputHeight">
+                <div class="inputText">Height:</div>
+                <input type="text" maxLength="2" id="inputHeight" class="inputBar" />
+            </div>
+        </div>
+        
+        <div id="mainBody" class="mainBody" style="width:600px; height:600px;">
+            <div id="tile1" class="tile"></div>
+            <div id="tile2" class="tile"></div>
+            <div id="tile3" class="tile"></div>
+        </div>
+ 
+        
+        
+        <script src ="gridModel.js"></script>
+        <script src ="gridView.js"></script>
+        <script>
+            "use strict";
+            let inputWidth = document.getElementById("inputWidth");
+            let inputHeight = document.getElementById("inputHeight");
+            
+            function isNumberKey(event){
+                var charCode = (event.which) ? event.which : event.keyCode;
+            
+                let ret;
+                if(charCode > 31 && (charCode < 48 || charCode > 57)){
+                    ret = false;
+                }else {
+                    ret = true;
+                }
+                
+                return ret;
+            }
+            
+            function normalizeValue(_value, minValue, maxValue){
+                let value = parseInt(_value);
+                if(isNaN(value)){
+                    value = _value;
+                }else {
+                    value = Math.max(minValue, value);
+                    value = Math.min(maxValue, value);
+                }
+                
+                return value;
+            };
+            
+            inputWidth.onkeypress = function(event, minValue, maxValue){
+                return isNumberKey(event);
+            };
+            
+            inputHeight.onkeypress = function(event){
+                return isNumberKey(event);
+            };
+            
+            inputWidth.onkeyup = function(){
+                inputWidth.value = normalizeValue(inputWidth.value, gridModel.minWidth, gridModel.maxWidth);
+                gridModel.setWidthHeight(parseInt(inputWidth.value), parseInt(inputHeight.value));
+                gridView.setWidthHeight(gridModel);
+                updateGridViewEventListener();
+            }.bind(this);
+            
+
+            
+            inputHeight.onkeyup = function(){
+                inputHeight.value = normalizeValue(inputHeight.value, gridModel.minHeight, gridModel.maxHeight);
+                gridModel.setWidthHeight(parseInt(inputWidth.value), parseInt(inputHeight.value));
+                gridView.setWidthHeight(gridModel);
+                updateGridViewEventListener();
+            }.bind(this);
+
+            
+
+            function updateGridViewEventListener(){
+                function mouseHandler(x, y, event){
+                    let tileIndex = gridModel.getTile(x, y);
+                    if(tileIndex < 0){
+                        tileIndex = 0;
+                    }else {
+                        tileIndex = -1;
+                    }
+                    gridModel.setTile(x, y, tileIndex);
+                    gridView.setTile(gridModel, x, y);
+                };
+                
+                gridView.addTilesListener("mouseup", mouseHandler);
+            }
+            
+         
+
+            
+            var gridModel = new GridModel(1, 100, 4, 1, 100, 4);
+            var gridView;
+            {
+                let mainBody = document.getElementById("mainBody");
+                let mainBodyMaxSize = {};
+                mainBodyMaxSize.width = parseInt(mainBody.style.width);
+                mainBodyMaxSize.height = parseInt(mainBody.style.height);
+                gridView = new GridView(mainBody, mainBodyMaxSize, gridModel);
+            }
+            
+            
+            inputHeight.value = this.gridModel.height;
+            inputWidth.value = this.gridModel.width;
+            
+
+            gridView.setWidthHeight(gridModel);
+            updateGridViewEventListener();
+
+
+        </script>
+    </body>
+</html>

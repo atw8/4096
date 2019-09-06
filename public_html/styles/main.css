@@ -1,0 +1,455 @@
+/*
+Copyright (C) 2016 Dmitry Ivanov
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 15/12/2016, 1:27:06 PM
+    Author     : Dmitry Ivanov
+*/
+
+body {
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    background-color: #faf8ef;
+}
+
+.heading {
+    display: table; 
+    height: 130px;   
+    width: 100%;
+    margin: 0em auto;
+}
+
+.bottom {
+    display: table;
+    width: 300px;
+    height: 110px;
+    margin: 0em auto;
+
+    text-align: center;
+}
+
+.bottom a{
+    display: table;
+    float: none;
+    
+    
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 0px 20px;
+    margin: 5px;
+    
+    text-decoration: none;
+    color: #f9f6f2;
+    height: 40px;
+    width: auto;
+    line-height: 42px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer; 
+    
+}
+
+.bottomUndo {
+    
+        margin: 0em auto;
+}
+
+.bottomDesigner {
+
+}
+
+.bottomRetry {
+ 
+}
+
+.bottomGame {
+    display:inline-block;
+    float: left;
+}
+
+
+
+.title {
+    float: left;
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0; 
+}
+
+.scoreBestContaier {
+    float: right;
+    text-align: right; 
+}
+
+.scoreContainer, .bestContainer {
+    position: relative;
+    display: inline-block;
+    background: #bcadb1;
+    padding: 15px 25px;
+    font-size: 25px;
+    height: 25px;
+    line-height: 47px;
+    font-weight: bold;
+    border-radius: 15px;
+    color: white;
+    margin-top: 15px;
+    text-align: center; }
+
+.scoreContainer:after, .bestContainer:after {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center;
+    color: #eee4da; 
+}
+@-webkit-keyframes move-up {
+    0% {
+        top: 25px;
+        opacity: 1; }
+
+    100% {
+        top: -50px;
+        opacity: 0; } }
+@-moz-keyframes move-up {
+    0% {
+        top: 25px;
+        opacity: 1; }
+
+    100% {
+        top: -50px;
+        opacity: 0; } }
+@keyframes move-up {
+    0% {
+        top: 25px;
+        opacity: 1; }
+
+    100% {
+        top: -50px;
+        opacity: 0; }} 
+
+.scoreContainer .scoreAddition, .bestContainer .scoreAddition {
+    position: absolute;
+    right: 30px;
+    color: red;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    color: rgba(119, 110, 101, 0.9);
+    z-index: 100;
+    -webkit-animation: move-up 600ms ease-in;
+    -moz-animation: move-up 600ms ease-in;
+    animation: move-up 600ms ease-in;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both; 
+}
+
+.scoreContainer:after {
+    content: "Score"; 
+}
+
+.bestContainer:after {
+    content: "Best"; 
+}
+
+.gameContainer {
+
+    position: relative;
+    margin: 1em auto;
+    padding: 0px;
+}
+.tileContainer {
+
+}
+
+.backEmptyTopRight {
+    position: absolute;
+    background: #faf8ef;
+
+    top: 0px;
+    right: 0px;
+
+    border-top-color : #faf8ef;
+    border-right-color : #faf8ef;
+
+    border-top-style : solid;
+    border-right-style : solid;
+
+    border-radius: 0px;
+}
+
+.backEmptyTopLeft {
+    position: absolute;
+    background: #faf8ef;
+
+    top: 0px;
+    left: 0px;
+
+    border-top-color : #faf8ef;
+    border-left-color : #faf8ef;
+
+    border-top-style : solid;
+    border-left-style : solid;
+
+    border-radius: 0px;
+}
+
+.backEmptyBottomRight {
+    position: absolute;
+    background: #faf8ef;
+
+    bottom: 0px;
+    right: 0px;
+
+    border-bottom-color : #faf8ef;
+    border-right-color : #faf8ef;
+
+    border-bottom-style : solid;
+    border-right-style : solid;
+
+    border-radius: 0px;
+}
+
+.backEmptyBottomLeft {
+    position: absolute;
+    background: #faf8ef;
+
+    bottom: 0px;
+    left: 0px;
+
+    border-bottom-color : #faf8ef;
+    border-left-color : #faf8ef;
+
+    border-bottom-style : solid;
+    border-left-style : solid;
+
+    border-radius: 0px;
+}
+
+
+
+
+.back {
+    border-radius: 0px;
+    position: absolute;
+    background-color:rgba(187, 173, 163, 1.0);
+    z-index: 1;
+}
+
+
+.backInner {               
+    border-radius: 0px;
+    position: absolute;
+    background-color: rgb(205, 193, 180);
+    border-radius: 3px;
+    z-index: 2;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+
+@-webkit-keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; } 
+}
+
+@-moz-keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; } 
+}
+
+@keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; } 
+}
+
+
+
+
+
+
+
+@-webkit-keyframes disappear {
+    0% { opacity: 1; }
+    100% { opacity: 0;} 
+}
+
+@-moz-keyframes disappear {
+    0% { opacitiy: 1; }
+    100% { opacity: 0; } 
+}
+
+@keyframes disappear {
+    0% { opacity: 1; }
+    100% { opacity: 0; } 
+}
+
+
+.tileNew {               
+    -webkit-animation: appear 200ms ease 100ms;
+    -moz-animation: appear 200ms ease 100ms;
+    animation: appear 200ms ease 100ms;
+    -webkit-animation-fill-mode: backwards;
+    -moz-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+
+    opacity: 1;
+    z-index: 4;
+}
+
+.tileOld {
+    -webkit-animation: disappear 200ms ease 100ms;
+    -moz-animation: disappear 200ms ease 100ms;
+    animation: disappear 200ms ease 100ms;
+    -webkit-animation-fill-mode: backwards;
+    -moz-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+
+    opacity: 0;
+    z-index: 2;
+}
+
+
+.tileInner {                
+    position: absolute;
+    background-color: rgb(205, 193, 180);
+    border-radius: 3px;
+    z-index: 3;
+    text-align: center;
+    font-weight: bold;
+
+    -o-transition:  100ms ease-in-out;
+    -ms-transition: 100ms ease-in-out;
+    -webkit-transition: 100ms ease-in-out;
+    -moz-transition: 100ms ease-in-out;
+    transition: 100ms ease-in-out;
+
+    -o-transition-property: -o-transform;
+    -ms-transition-proprty: -ms-transform;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+}
+
+.gameMessage {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(238, 228, 218, 0.5);
+    z-index: 100;
+    text-align: center;
+    -webkit-animation: appear 300ms ease 300ms;
+    -moz-animation: appear 300ms ease 300ms;
+    animation: appear 300ms ease 300ms;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both; 
+}
+
+.gameMessage p {
+    font-size: 60px;
+    font-weight: bold;
+    height: 60px;
+    line-height: 60px;
+    margin-top: 222px;
+}
+
+.gameMessage a {
+    display: inline-block;
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #f9f6f2;
+    height: 40px;
+    line-height: 42px;
+    margin-left: 9px; 
+    cursor: pointer; 
+}
+
+
+.gameMessageShow {
+    display: inline-block;
+}
+
+.gameMessageRetry {
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    margin-top: 2px; 
+}
+
+
+/*
+    Designer Related Styles
+*/
+
+
+
+.inputBody {
+    float:right;
+    margin: 0.0em auto;
+    border: 1px solid black;
+
+    border-radius: 5px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+
+    background-color: #bcadb1;
+}
+
+.inputText {
+    font-family:Arial, Sans-Serif;
+    font-size: 20px;
+    color: black; 
+    font-weight: bold;
+    font-family: arial;
+    margin: 2px;
+    
+    position: relative;
+    float: left;
+}
+.inputBar {
+    position: relative;
+    font-family:Arial, Sans-Serif;
+    font-size: 20px;
+    display: inline-block;
+    float: right;
+
+    margin-left: 0.7em;
+    margin-right: 0.7em;
+    background-color: #d6e5f4;
+    width:50px;
+}
+
+.inputWrapper {
+    padding: 0.4em;
+    margin: 0.3em;
+    overflow: hidden;
+    border: 2px solid black;
+    position: relative;
+}
+
